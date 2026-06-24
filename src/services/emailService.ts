@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 // 🔑 استبدل القيم دي بقيمك من EmailJS
 const SERVICE_ID = 'service_y6fqexg';        // <-- Service ID بتاعك
 const TEMPLATE_ID = 'template_hrw18y5';    // <-- Template ID بتاعك  
-const PUBLIC_KEY = 'mZ3NAd6oKbkdRBn10';   // <-- Public Key بتاعك
+const PUBLIC_KEY = 'TC6lX3r3_uthaJiFp';   // <-- Public Key بتاعك
 
 export async function sendDateEmail(location: string) {
   try {
