@@ -1,27 +1,40 @@
-import emailjs from '@emailjs/browser';
+// 🔑 الـ Access Key من Web3Forms (Form Setup)
+const ACCESS_KEY = 'adb57509-0905-43cf-8e01-be7f814328fa';
 
-// 🔑 استبدل القيم دي بقيمك من EmailJS
-const SERVICE_ID = 'service_y6fqexg';        // <-- Service ID بتاعك
-const TEMPLATE_ID = 'template_hrw18y5';    // <-- Template ID بتاعك  
-const PUBLIC_KEY = 'TC6lX3r3_uthaJiFp';   // <-- Public Key بتاعك
-
-export async function sendDateEmail(location: string) {
+export async function sendDateConfirmation(location: string) {
   try {
-    const result = await emailjs.send(
-      SERVICE_ID,
-      TEMPLATE_ID,
-      {
-        location: location,
-        time: 'Thursday',
-        timestamp: new Date().toLocaleString(),
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
-      { publicKey: PUBLIC_KEY }
-    );
+      body: JSON.stringify({
+        access_key: ACCESS_KEY,
+        subject: '💕 SHE SAID YES! New Date Confirmation',
+        from_name: 'Date Website 💌',
+        message: `
+🎉 SHE SAID YES! 🎉
+
+📍 Location: ${location}
+📅 Day: Thursday
+⏰ Submitted at: ${new Date().toLocaleString()}
+
+Don't forget to prepare! 💐✨
+        `.trim(),
+      }),
+    });
+
+    const result = await response.json();
     
-    console.log('✅ Email sent!', result.text);
-    return result;
+    if (result.success) {
+      console.log('✅ Email sent successfully!');
+      return result;
+    } else {
+      throw new Error(result.message || 'Failed to send email');
+    }
   } catch (error) {
-    console.error('❌ Failed to send email:', error);
+    console.error('❌ Email error:', error);
     throw error;
   }
 }
