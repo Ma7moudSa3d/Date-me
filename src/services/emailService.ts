@@ -1,5 +1,5 @@
 // 🔑 الـ Access Key من Web3Forms (Form Setup)
-const ACCESS_KEY = 'adb57509-0905-43cf-8e01-be7f814328fa';
+const ACCESS_KEY = 'e6f5ad71-ccbd-423a-be06-0e7c94edcfe2';
 
 export async function sendDateConfirmation(location: string) {
   try {
